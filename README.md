@@ -1,4 +1,4 @@
-# SRFI nnn: Title
+# SRFI nnn: Browse URL
 
 by Firstname Lastname, Another Person, Third Person
 
@@ -8,56 +8,69 @@ Early Draft
 
 ## Abstract
 
-??? abstract, preferably shorter than 200 words. Please outline the
-need for, and design of, the proposal.
+This SRFI defines a `browse-url` library similar to the Emacs package by that name.
 
 ## Issues
 
-??? Optional section that may point out things to be resolved. This
-will not appear in the final SRFI.
+* Different URL schemes: mailto, ftp, gemini, etc.
 
 ## Rationale
 
-??? detailed rationale. This should be 200-500 words long. Please
-explain why the proposal should be incorporated as a standard feature
-in Scheme implementations. List related standards and SRFIs, including
-dependencies, conflicts, and replacements. If there are other
-standards which this proposal will replace or with which it will
-compete, please explain why the present proposal is a substantial
-improvement.
-
-### Survey of prior art
-
-GitHub's version of Markdown can make tables. For example:
-
-| System        | Procedure | Signature                 |
-| ------------- |:---------:| ------------------------- |
-| System A      | `jumble`  | _list_ _elem_             |
-| System B      | `bungle`  | _elem_ _list_             |
-| System C      | `frob`    | _list_ _elem_ _predicate_ |
+One common task is opening documentation from the REPL.
 
 ## Specification
 
-??? detailed specification. This should be detailed enough that a
-conforming implementation could be completely created from this
-description.
+### Definition of a browser
+
+A browser is an object that can do to things:
+
+- Check whether the browser is available in general.
+- Check whether the browser supports opening a given URL.
+- Open the given URL.
+
+### Exceptions
+
+`(browse-url-error? object)`
+
+`(browse-url-error-url error)`
+
+`(browse-url-error-browser error)`
+
+### Settings
+
+`(browse-url-browsers [list])` (parameter)
+
+The value is a list of zero or more browsers, tried in order from first to last.
+
+`(browse-url-environment [plist])` (parameter)
+
+The following are:
+
+* `graphical?`
+
+### API
+
+Settings for the browser.
+
+`(browse-url-find-browser url)`
+
+Figure out the browser.
+
+`(browse-url url)`
+
+Browse
 
 ## Examples
 
-## Implementation
+`(browse-url "gemini://www.scheme.org/") -> lagrange`
 
-??? explanation of how it meets the sample implementation requirement
-(see process), and the code, if possible, or a link to it Source for
-the sample implementation.
+`(browse-url "https://www.scheme.org/")`
+
+## Implementation
 
 ## Acknowledgements
 
-??? Give credits where credits is due.
-
 ## References
-
-??? Optional section with links to web pages, books and papers that
-helped design the SRFI.
 
 ## Copyright
 
